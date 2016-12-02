@@ -1,8 +1,8 @@
 /**
- * Day 1 challenges
+ * Day 2 challenges
  */
 /**
  * @author desrtfx
  *
  */
-package day1;
+package day2;
