@@ -91,10 +91,10 @@ public class Day3 {
 	public int part2() {
 		int count = 0;
 		if (rawData.size() % 3 == 0) {
-			for(int i = 0; i < rawData.size(); i++) {
+			for(int i = 0; i < rawData.size(); ) { // no need for increment here
 				Matcher m1 = PATTERN.matcher(rawData.get(i++));
 				Matcher m2 = PATTERN.matcher(rawData.get(i++));
-				Matcher m3 = PATTERN.matcher(rawData.get(i));
+				Matcher m3 = PATTERN.matcher(rawData.get(i++));
 				if(m1.find() && m2.find() && m3.find()) {
 					for (int g = 1; g < 4; g++) {
 						count += isTriangle(new int[]{Integer.parseInt(m1.group(g)), Integer.parseInt(m2.group(g)), Integer.parseInt(m3.group(g))}) ? 1 : 0;
