@@ -97,7 +97,10 @@ public class Day3 {
 				Matcher m3 = PATTERN.matcher(rawData.get(i++));
 				if(m1.find() && m2.find() && m3.find()) {
 					for (int g = 1; g < 4; g++) {
-						count += isTriangle(new int[]{Integer.parseInt(m1.group(g)), Integer.parseInt(m2.group(g)), Integer.parseInt(m3.group(g))}) ? 1 : 0;
+						count += isTriangle(new int[]{
+								Integer.parseInt(m1.group(g)), 
+								Integer.parseInt(m2.group(g)), 
+								Integer.parseInt(m3.group(g))}) ? 1 : 0;
 					}
 				}
 			}
