@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import util.FileIO;
@@ -102,16 +103,21 @@ public class Day6 {
 	
 	public String getWord(boolean part2) {
 		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < freq.size(); i++) {
-			String s = freq.get(i).entrySet().stream()
-					.sorted(Map.Entry.comparingByKey())
-					.sorted((part2 ? Map.Entry.comparingByValue() : Collections.reverseOrder(Map.Entry.comparingByValue())))
-					.limit(1L)
-					.map(Map.Entry::getKey)
-					.map(c -> Character.toString(c))
-					.collect(Collectors.joining(""));
-			sb.append(s);
-		}
+		freq.stream().forEach(new Consumer<Map<Character, Integer>>() {
+
+			@Override
+			public void accept(Map<Character, Integer> m) {
+				String s = m.entrySet().stream()
+						.sorted(Map.Entry.comparingByKey())
+						.sorted((part2 ? Map.Entry.comparingByValue() : Collections.reverseOrder(Map.Entry.comparingByValue())))
+						.limit(1L)
+						.map(Map.Entry::getKey)
+						.map(c -> Character.toString(c))
+						.collect(Collectors.joining(""));
+				sb.append(s);
+			}
+		});
+
 		System.out.println(sb.toString());
 		return sb.toString();
 	}
