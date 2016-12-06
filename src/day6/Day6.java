@@ -94,11 +94,17 @@ public class Day6 {
 			freq.add(new HashMap<Character, Integer>());
 		}
 		// parse actual data
-		for(String s : data) {
-			for(int i = 0; i < s.length(); i++) {
-				freq.get(i).put(s.charAt(i), freq.get(i).getOrDefault(s.charAt(i),0) + 1);
+		data.forEach(new Consumer<String>() {
+
+			@Override
+			public void accept(String s) {
+				for(int i = 0; i < s.length(); i++) {
+					freq.get(i).put(s.charAt(i), freq.get(i).getOrDefault(s.charAt(i),0) + 1);
+				}				
 			}
-		}
+			
+		});
+
 	}
 	
 	public String getWord(boolean part2) {
