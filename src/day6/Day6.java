@@ -127,12 +127,10 @@ public class Day6 {
 	}
 	
 	public String part1() {
-		//calcFreq(data);
 		return getWord(false);
 	}
 	
 	public String part2() {
-		//calcFreq(data);
 		return getWord(true);
 	}
 	
