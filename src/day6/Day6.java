@@ -123,35 +123,35 @@ public class Day6 {
 				sb.append(s);
 			}
 		});
-
-		System.out.println(sb.toString());
 		return sb.toString();
 	}
 	
-	public String part1(List<String> data) {
-		calcFreq(data);
+	public String part1() {
+		//calcFreq(data);
 		return getWord(false);
 	}
 	
-	public String part2(List<String> data) {
-		calcFreq(data);
+	public String part2() {
+		//calcFreq(data);
 		return getWord(true);
 	}
 	
 			
 	public static void main(String[] args) {
 		Day6 day6 = new Day6();
-		
-		String testResult = day6.part1(testData);
-		System.out.printf("Test run part 1:\texpected: %s\tgenerated: %s\tPassed: %b%n",TEST_EXPECTED_1,testResult,TEST_EXPECTED_1.equals(testResult));
-		
-		String part1 = day6.part1(data);
-		System.out.printf("Part 1:\tgenerated:%s%n",part1);
 
-		testResult = day6.part2(testData);
+		// Test data
+		day6.calcFreq(testData);
+		String testResult = day6.part1();
+		System.out.printf("Test run part 1:\texpected: %s\tgenerated: %s\tPassed: %b%n",TEST_EXPECTED_1,testResult,TEST_EXPECTED_1.equals(testResult));
+		testResult = day6.part2();
 		System.out.printf("Test run part 2:\texpected: %s\tgenerated: %s\tPassed: %b%n",TEST_EXPECTED_2,testResult,TEST_EXPECTED_2.equals(testResult));
 		
-		String part2 = day6.part2(data);
+		// real data
+		day6.calcFreq(data);
+		String part1 = day6.part1();
+		System.out.printf("Part 1:\tgenerated:%s%n",part1);
+		String part2 = day6.part2();
 		System.out.printf("Part 2:\tgenerated:%s%n",part2);
 
 		
