@@ -14,7 +14,7 @@ public class Day8 {
 
 	public static List<String[]> data;
 	
-	private static char[][] mem = new char[ROWS][COLS];
+	private static char[][] disp = new char[ROWS][COLS];
 	
 	
 	
@@ -23,52 +23,52 @@ public class Day8 {
 		data = FileIO.getFileLinesSplit(FILENAME, DELIMITER);
 		
 		// initialize display
-		for(int row = 0; row < mem.length; row++) {
-			for(int col = 0; col < mem[row].length; col++) {
-				mem[row][col] = '.';
+		for(int row = 0; row < disp.length; row++) {
+			for(int col = 0; col < disp[row].length; col++) {
+				disp[row][col] = '.';
 			}
 		}
 	}
 	
 	public static void display() {
-		for(int row = 0; row < mem.length; row++) {
-			System.out.println(new String(mem[row]));
+		for(int row = 0; row < disp.length; row++) {
+			System.out.println(new String(disp[row]));
 		}
 	}
 	
 	public static void rect(int width, int height) {
 		for(int row = 0; row < height; row++) {
 			for(int col = 0; col < width; col++) {
-				mem[row][col] = '#';
+				disp[row][col] = '#';
 			}
 		}
 	}
 	
 	public static void rotateRow(int row, int by) {
 		for(int i = 0; i < by; i++) {
-			char last = mem[row][mem[row].length - 1];
-			for (int col = mem[row].length-1; col > 0; col--) {
-				mem[row][col] = mem[row][col - 1];
+			char last = disp[row][disp[row].length - 1];
+			for (int col = disp[row].length-1; col > 0; col--) {
+				disp[row][col] = disp[row][col - 1];
 			}
-			mem[row][0] = last;
+			disp[row][0] = last;
 		}
 	}
 
 	public static void rotateCol(int col, int by) {
 		for(int i = 0; i < by; i++) {
-			char last = mem[mem.length - 1][col];
-			for(int row = mem.length - 1; row > 0; row--) {
-				mem[row][col] = mem[row - 1][col];
+			char last = disp[disp.length - 1][col];
+			for(int row = disp.length - 1; row > 0; row--) {
+				disp[row][col] = disp[row - 1][col];
 			}
-			mem[0][col] = last;
+			disp[0][col] = last;
 		}
 	}
 	
 	public static int countLit() {
 		int count = 0;
-		for(int row = 0; row < mem.length; row++) {
-			for(int col = 0; col < mem[row].length; col++) {
-				count += mem[row][col] == '#' ? 1 : 0;
+		for(int row = 0; row < disp.length; row++) {
+			for(int col = 0; col < disp[row].length; col++) {
+				count += disp[row][col] == '#' ? 1 : 0;
 			}
 		}
 		return count;
