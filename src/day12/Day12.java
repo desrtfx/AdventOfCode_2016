@@ -1,5 +1,11 @@
 package day12;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import util.FileIO;
+
 /* 
  * --- Day 12: Leonardo's Monorail ---
  * 
@@ -49,8 +55,111 @@ package day12;
  * what value is left in register a?
  * 
  * To begin, get your puzzle input.
+ * 
+ * --- Part Two ---
+ *
+ * As you head down the fire escape to the monorail, you notice it didn't start; 
+ * register c needs to be initialized to the position of the ignition key.
+ *
+ * If you instead initialize register c to be 1, what value is now left in register a?
  */
+
+class CPU {
+	Map<String, Integer> registers = new HashMap<>(); // CPU registers
+	List<String> program; // CPU program
+	int ip; // Instruction Pointer
+	
+	public CPU(List<String> program) { // New CPU with a program
+		this(program,0,0,0,0);
+		
+	}
+	
+	public CPU(List<String> program, int a, int b, int c, int d) { // New CPU with a program and preset registers
+		this.program = program;
+		registers.put("a", a);
+		registers.put("b", b);
+		registers.put("c", c);
+		registers.put("d", d);
+	}
+	
+	public int getRegisterValue(String register) {
+		return registers.get(register);
+	}
+	
+	public void process(String instruction) {
+		String[] inst = instruction.split(" ");
+		switch(inst[0]) {
+		case "cpy":
+			if (isRegister(inst[1])) { // reg to reg copy
+				registers.put(inst[2], registers.get(inst[1]));
+			} else { // direct to register
+				registers.put(inst[2], Integer.parseInt(inst[1]));
+			}
+			ip++;
+			break;
+		case "inc":
+			registers.put(inst[1], registers.get(inst[1]) + 1);
+			ip++;
+			break;
+		case "dec":
+			registers.put(inst[1], registers.get(inst[1]) - 1);
+			ip++;
+			break;
+		case "jnz":
+			int value = (isRegister(inst[1])) ? registers.get(inst[1]) : Integer.parseInt(inst[1]);
+			ip += (value != 0) ? Integer.parseInt(inst[2]) : 1;
+			break;
+		}
+	}
+	
+	private boolean isRegister(String data) {
+		return (data.charAt(0) >= 'a' && data.charAt(0) <= 'd');
+	}
+	
+	public boolean run() {
+		if (program == null) {
+			return false;
+		}
+		ip = 0;
+		while (ip < program.size()) {
+			process(program.get(ip));
+		}
+		
+		return true;
+	}
+	
+}
 
 public class Day12 {
 
+	public static final String FILENAME = "./resources/Input_Day12.txt";
+
+	public int solvePart1() {
+		List<String> program = FileIO.getFileAsList(FILENAME);
+		CPU cpu = new CPU(program);
+		if (cpu.run()) {
+			return cpu.getRegisterValue("a");
+		} 
+		return -1;
+	}
+	
+	public int solvePart2() {
+		List<String> program = FileIO.getFileAsList(FILENAME);
+		CPU cpu = new CPU(program, 0, 0, 1, 0);
+		if (cpu.run()) {
+			return cpu.getRegisterValue("a");
+		} 
+		return -1;
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		Day12 day12 = new Day12();
+		
+		System.out.printf("Part 1: Register a: %d%n", day12.solvePart1());
+		System.out.printf("Part 2: Register a: %d%n", day12.solvePart2());
+		
+	}
+	
 }
