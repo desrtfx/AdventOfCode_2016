@@ -180,8 +180,17 @@ public class Day14 {
 	public static void main(String[] args){
 		Day14 day14 = new Day14();
 		
-		System.out.printf("%nSolution for part 1: %d%n", day14.solvePart1());
-		System.out.printf("%nSolution for part 2: %d%n", day14.solvePart2());
+		System.out.println("Solving part 1 - please standby.");
+		long start1 = System.currentTimeMillis();
+		int part1 = day14.solvePart1();
+		long end1 = System.currentTimeMillis();
+		System.out.printf("Solution for part 1: %d - took %f seconds%n", part1, (end1-start1)/1000.0);
+
+		System.out.println("\nSolving part 2 - please standby.");
+		long start2 = System.currentTimeMillis();
+		int part2 = day14.solvePart2();
+		long end2 = System.currentTimeMillis();
+		System.out.printf("Solution for part 2: %d - took %f seconds%n", part2, (end2-start2)/1000.0);
 		
 	}
 	
