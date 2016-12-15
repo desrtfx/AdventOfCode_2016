@@ -106,7 +106,7 @@ public class Day15 {
 		}
 
 		public boolean reaches0(int t) {
-			return ((t + startPos) % slots == 0);
+			return ((t + startPos + no) % slots == 0);
 		}
 	}
 
@@ -116,7 +116,7 @@ public class Day15 {
 		while (!found) {
 			found = true;
 			for (Disc d : discs) {
-				if (!d.reaches0(tick + d.no)) {
+				if (!d.reaches0(tick)) {
 					found = false;
 				}
 			}
