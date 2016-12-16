@@ -93,27 +93,25 @@ public class Day16 {
 		StringBuilder sb = new StringBuilder(input);
 		while (sb.length() < length) {
 			String a = sb.toString();
+			String b = new StringBuilder(a).reverse().toString();
+			b = b.replaceAll("0", "9");
+			b = b.replaceAll("1", "0");
+			b = b.replaceAll("9", "1");
 			sb.append('0');
-			for(int i=a.length() - 1; i >=0; i--) {
-				sb.append(a.charAt(i) == '0' ? '1' : '0');
-			}
+			sb.append(b);
 		}
 		
 		// Calc Hash
-		String file=sb.substring(0, length);
+		StringBuilder tmp = new StringBuilder(sb.substring(0, length));
 		do {
 			sb.setLength(0);
-			for(int i = 0; i < file.length()-1; i+=2) {
-				String x = file.substring(i,i+2);
-				if (("11".equals(x)) || ("00".equals(x))) {
-					sb.append('1');
-				} else {
-					sb.append('0');
-				}
+			for(int i = 0; i < tmp.length()-1; i+=2) { 
+				sb.append( tmp.charAt(i) == tmp.charAt(i+1) ? 1 : 0);
 			}
-			file = sb.toString();
-		} while (file.length() % 2 == 0);
-		return file;
+			tmp.setLength(0);
+			tmp.append(sb);
+		} while (tmp.length() % 2 == 0);
+		return tmp.toString();
 	}
 	
 	
