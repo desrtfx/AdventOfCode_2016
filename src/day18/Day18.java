@@ -135,27 +135,27 @@ public class Day18 {
      * Which finally results in
      * Left XOR Right 
 	 */ 
-	 
-	public String transform(String row) {
-		StringBuilder sb = new StringBuilder();
-		int r= row.length() - 1;
-		for (int i = 0; i <= r; i++) {
-			char left = (i == 0) ? '.' : row.charAt(i - 1);
-			char right = (i == r) ? '.' : row.charAt(i + 1);
-			sb.append((left == '^') ^ (right == '^') ? '^' : '.');
-		}
-		return sb.toString();
-	}
 	
-	public int countSafe(String row) {
+	public char[] transform(char[] row) {
+		char[] newRow = new char[row.length];
+		int r = row.length - 1;
+		for(int i = 0; i <= r; i++) {
+			char left = (i == 0)?'.':row[i - 1];
+			char right = (i == r)?'.':row[i + 1];
+			newRow[i] = ((left == '^') ^ (right == '^')) ? '^' : '.';
+		}
+		return newRow;
+	}
+
+	public int countSafe(char[] row) {
 		int safe = 0;
-		for (char c : row.toCharArray()) {
+		for (char c : row) {
 			safe += (c == '.') ? 1 : 0;
 		}
 		return safe;
 	}
 	
-	public int solve(String input, int rows) {
+	public int solve(char[] input, int rows) {
 		int safe = 0;
 		for(int i = 0; i < rows; i++) {
 			safe += countSafe(input);
@@ -165,11 +165,11 @@ public class Day18 {
 	}
 
 	public int solvePart1(String input) {
-		return solve(input, 40);
+		return solve(input.toCharArray(), 40);
 	}
 	
 	public int solvePart2(String input) {
-		return solve(input, 400000);
+		return solve(input.toCharArray(), 400000);
 	}
 	
 	public static void main(String[] args) {
