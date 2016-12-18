@@ -94,22 +94,6 @@ import java.util.Map;
 public class Day18 {
 
 	public static final String INPUT = ".^^..^...^..^^.^^^.^^^.^^^^^^.^.^^^^.^^.^^^^^^.^...^......^...^^^..^^^.....^^^^^^^^^....^^...^^^^..^";
-
-	public static final Map<Character, Boolean> TO_BOOL;
-	public static final Map<Boolean, Character> TO_CHAR;
-
-	static {
-		TO_BOOL = new HashMap<>();
-		TO_CHAR = new HashMap<>();
-
-		TO_BOOL.put('^', Boolean.TRUE);
-		TO_BOOL.put('.', Boolean.FALSE);
-
-		TO_CHAR.put(Boolean.TRUE, '^');
-		TO_CHAR.put(Boolean.FALSE, '.');
-	}
-
-	
 	
 	/**
 	 * @param row - the original row
@@ -157,10 +141,11 @@ public class Day18 {
 	 
 	public String transform(String row) {
 		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < row.length(); i++) {
-			boolean left = (i == 0) ? false : TO_BOOL.get(row.charAt(i - 1));
-			boolean right = (i == row.length() - 1) ? false : TO_BOOL.get(row.charAt(i + 1));
-			sb.append(TO_CHAR.get(left ^ right));
+		int r= row.length() - 1;
+		for (int i = 0; i <= r; i++) {
+			char left = (i == 0) ? '.' : row.charAt(i - 1);
+			char right = (i == r) ? '.' : row.charAt(i + 1);
+			sb.append((left == '^') ^ (right == '^') ? '^' : '.');
 		}
 		return sb.toString();
 	}
