@@ -1,8 +1,5 @@
 package day18;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /* 
  * --- Day 18: Like a Rogue ---
  * 
