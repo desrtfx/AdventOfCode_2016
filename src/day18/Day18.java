@@ -146,7 +146,7 @@ public class Day18 {
 		for (int i = 0; i <= r; i++) {
 			char left = (i == 0) ? '.' : row[i - 1];
 			char right = (i == r) ? '.' : row[i + 1];
-			newRow[i] = ((left == '^') ^ (right == '^')) ? '^' : '.';
+			newRow[i] = (left == right) ? '.' : '^';
 		}
 		return newRow;
 	}
