@@ -128,19 +128,19 @@ public class Day18 {
 	 * <table><tr>
      * <th></th>
      * <th>!Left &amp;&amp; Center</th>
-     * <th>Left &amp;&amp; Center</th>
-     * <th>Left &amp;&amp; !Center</th>
      * <th>!Left &amp;&amp; !Center</th>
+     * <th>Left &amp;&amp; !Center</th>
+     * <th>Left &amp;&amp; Center</th>
      * </tr>
      * <tr>
-     * <td>Right</td>
+     * <td><strong>Right</strong></td>
      * <td>Trap</td>
      * <td>Trap</td>
      * <td>Safe</td>
      * <td>Safe</td>
      * </tr>
      * <tr>
-     * <td>!Right</td>
+     * <td><strong>!Right</strong></td>
      * <td>Safe</td>
      * <td>Safe</td>
      * <td>Trap</td>
