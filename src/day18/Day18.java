@@ -87,61 +87,65 @@ package day18;
  * 
  */
 
-
 public class Day18 {
 
 	public static final String INPUT = ".^^..^...^..^^.^^^.^^^.^^^^^^.^.^^^^.^^.^^^^^^.^...^......^...^^^..^^^.....^^^^^^^^^....^^...^^^^..^";
-	
+
 	/**
-	 * @param row - the original row
+	 * @param row
+	 *            - the original row
 	 * @return - the transformed row
 	 * 
-	 * transformation rules:<BR><BR>
+	 *         transformation rules:<BR>
+	 *         <BR>
 	 * 
-	 * A new tile is a trap if:
-	 * <UL><LI>Its <strong>left</strong> and <strong>center</strong> tiles are traps, but its <strong>right</strong> tile is not.</LI>
-	 * <LI>Its <strong>center</strong> and <strong>right</strong> tiles are traps, but its <strong>left</strong> tile is not.</LI>
-	 * <LI>Only its <strong>left</strong> tile is a trap.</LI>
-	 * <LI>Only its <strong>right</strong> tile is a trap.</LI>
+	 *         A new tile is a trap if:
+	 *         <UL>
+	 *         <LI>Its <strong>left</strong> and <strong>center</strong> tiles
+	 *         are traps, but its <strong>right</strong> tile is not.</LI>
+	 *         <LI>Its <strong>center</strong> and <strong>right</strong> tiles
+	 *         are traps, but its <strong>left</strong> tile is not.</LI>
+	 *         <LI>Only its <strong>left</strong> tile is a trap.</LI>
+	 *         <LI>Only its <strong>right</strong> tile is a trap.</LI>
 	 * 
-	 * Creating a KV MAP yields
+	 *         Creating a KV MAP yields
 	 * 
-	 * <table><tr>
-     * <th></th>
-     * <th>!Left &amp;&amp; Center</th>
-     * <th>!Left &amp;&amp; !Center</th>
-     * <th>Left &amp;&amp; !Center</th>
-     * <th>Left &amp;&amp; Center</th>
-     * </tr>
-     * <tr>
-     * <td><strong>Right</strong></td>
-     * <td>Trap</td>
-     * <td>Trap</td>
-     * <td>Safe</td>
-     * <td>Safe</td>
-     * </tr>
-     * <tr>
-     * <td><strong>!Right</strong></td>
-     * <td>Safe</td>
-     * <td>Safe</td>
-     * <td>Trap</td>
-     * <td>Trap</td>
-     * </tr>
-     * </table>
-     * 
-     * This can be further simplified to:
-     * Left && !Right || !Left  && Right
-     * 
-     * Which finally results in
-     * Left XOR Right 
-	 */ 
-	
+	 *         <table>
+	 *         <tr>
+	 *         <th></th>
+	 *         <th>!Left &amp;&amp; Center</th>
+	 *         <th>!Left &amp;&amp; !Center</th>
+	 *         <th>Left &amp;&amp; !Center</th>
+	 *         <th>Left &amp;&amp; Center</th>
+	 *         </tr>
+	 *         <tr>
+	 *         <td><strong>Right</strong></td>
+	 *         <td>Trap</td>
+	 *         <td>Trap</td>
+	 *         <td>Safe</td>
+	 *         <td>Safe</td>
+	 *         </tr>
+	 *         <tr>
+	 *         <td><strong>!Right</strong></td>
+	 *         <td>Safe</td>
+	 *         <td>Safe</td>
+	 *         <td>Trap</td>
+	 *         <td>Trap</td>
+	 *         </tr>
+	 *         </table>
+	 * 
+	 *         This can be further simplified to: Left && !Right || !Left &&
+	 *         Right
+	 * 
+	 *         Which finally results in Left XOR Right
+	 */
+
 	public char[] transform(char[] row) {
 		char[] newRow = new char[row.length];
 		int r = row.length - 1;
-		for(int i = 0; i <= r; i++) {
-			char left = (i == 0)?'.':row[i - 1];
-			char right = (i == r)?'.':row[i + 1];
+		for (int i = 0; i <= r; i++) {
+			char left = (i == 0) ? '.' : row[i - 1];
+			char right = (i == r) ? '.' : row[i + 1];
 			newRow[i] = ((left == '^') ^ (right == '^')) ? '^' : '.';
 		}
 		return newRow;
@@ -152,12 +156,12 @@ public class Day18 {
 		for (char c : row) {
 			safe += (c == '.') ? 1 : 0;
 		}
-		return safe;
+		return safe; 
 	}
-	
+
 	public int solve(char[] input, int rows) {
 		int safe = 0;
-		for(int i = 0; i < rows; i++) {
+		for (int i = 0; i < rows; i++) {
 			safe += countSafe(input);
 			input = transform(input);
 		}
@@ -167,17 +171,16 @@ public class Day18 {
 	public int solvePart1(String input) {
 		return solve(input.toCharArray(), 40);
 	}
-	
+
 	public int solvePart2(String input) {
 		return solve(input.toCharArray(), 400000);
 	}
-	
+
 	public static void main(String[] args) {
 		Day18 day18 = new Day18();
-		
+
 		System.out.println("Part 1: " + day18.solvePart1(INPUT));
 		System.out.println("Part 2: " + day18.solvePart2(INPUT));
-
 
 	}
 
