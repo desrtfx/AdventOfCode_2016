@@ -74,14 +74,14 @@ import java.util.LinkedList;
 
 public class Day19 {
 	
-	public static final int INPUT_PART_1 = 3012210;
+	public static final int INPUT = 3012210;
 	
 	
 	public int solvePart1() {
 		// Josephus Problem (Numberphile: https://www.youtube.com/watch?v=uCsD3ZGzMgE) - the solution is
 		// to convert to binary, strip the MSB
 		// append to LSB
-		String binPart = Integer.toBinaryString(INPUT_PART_1);
+		String binPart = Integer.toBinaryString(INPUT);
 		String resolved = binPart.substring(1) + binPart.charAt(0);
 		int solved = Integer.parseInt(resolved, 2);
 		return solved;
@@ -94,7 +94,7 @@ public class Day19 {
         LinkedList<Integer> half1 = new LinkedList<>();
         LinkedList<Integer> half2 = new LinkedList<>();
         // fill the lists
-        int size = INPUT_PART_1;
+        int size = INPUT;
         for(int i = 1; i<=size; i++) {
             if(i<=size/2) half1.addLast(i);
             else half2.addLast(i);
