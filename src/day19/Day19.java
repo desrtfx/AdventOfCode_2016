@@ -91,35 +91,36 @@ public class Day19 {
 		// make 2 queues - 1st half and 2md half
 		// if for first half add to h1, for second half add to h2
 		
-        LinkedList<Integer> h1 = new LinkedList<>();
-        LinkedList<Integer> h2 = new LinkedList<>();
+        LinkedList<Integer> half1 = new LinkedList<>();
+        LinkedList<Integer> half2 = new LinkedList<>();
+        // fill the lists
         int size = INPUT_PART_1;
         for(int i = 1; i<=size; i++) {
-            if(i<=size/2) h1.addLast(i);
-            else h2.addLast(i);
+            if(i<=size/2) half1.addLast(i);
+            else half2.addLast(i);
         }
         
         
         // removal starts
-        while(h1.size() + h2.size() != 1) {
+        while(half1.size() + half2.size() != 1) {
         	// get first element from h1
-            int x = h1.pollFirst();
+            int x = half1.pollFirst();
             // if sizes are equal, remove last from h1
             // else remove first from h2
-            if(h1.size() == h2.size()) {
-                h1.pollLast();
+            if(half1.size() == half2.size()) {
+                half1.pollLast();
             }else {
-                h2.pollFirst();
+                half2.pollFirst();
             }
             // add the first element from h1 (retrieved previously)
             // to the end of h2
-            h2.addLast(x);
+            half2.addLast(x);
             // add the first element from h2 to the end of h1
-            int a = h2.pollFirst();
-            h1.addLast(a);
+            int a = half2.pollFirst();
+            half1.addLast(a);
         }
         // first element in h1 is the solution
-        return h1.pollFirst();
+        return half1.pollFirst();
 		
 		
 	}
